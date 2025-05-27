@@ -1,0 +1,54 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "nokia-open-suite"
+dynamic = ["version"]
+description = "Let's you sync your S30+ OS Nokia phone with your laptop."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+keywords = []
+authors = [{ name = "Yiannis Charalambous" }]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = []
+
+[project.urls]
+Documentation = "https://github.com/Yiannis128/s30plus-music-sync#readme"
+Issues = "https://github.com/Yiannis128/s30plus-music-sync/issues"
+Source = "https://github.com/Yiannis128/s30plus-music-sync"
+
+[project.scripts]
+ytsync = "nokia_sync_music.__main__:main"
+
+[tool.hatch.version]
+path = "nokia_sync_music/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = ["mypy>=1.0.0"]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:nokia_sync_music tests}"
+
+[tool.coverage.run]
+source_pkgs = ["nokia_sync_music", "tests"]
+branch = true
+parallel = true
+omit = ["nokia_sync_music/__about__.py"]
+
+[tool.coverage.paths]
+nokia_sync_music = ["nokia_sync_music", "*/nokia-open-suite/nokia_sync_music"]
+tests = ["tests", "*/nokia-open-suite/tests"]
+
+[tool.coverage.report]
+exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]
